@@ -44,9 +44,13 @@ def tokenize(text):
         if char == "{":
             tokenList.append(Tokens.LITEXP)
             tokenList.append(Tokens.CODE)
-
         if char == "}":
             tokenList.append(0xff)
+
+        # Check if list encloser
+        if char == '[':
+            tokenList.append(Tokens.LITEXP)
+            tokenList.append(Tokens.LIST)
         
         # If the current character is a seperator
         if char in tokens.SEP_TOKENS:
@@ -172,5 +176,17 @@ if __name__ == "__main__":
                 bytes = byteifyTokens(tokenList)
                 outFile.write(bytes)
                 print("\n")
-                print("0x" + ", 0x".join("%02x" % b for b in bytes))
-            
+
+                print("Code str: ")
+                print("\t" + "".join("%02x" % b for b in bytes))
+
+                print("\nC formatted list: ")
+                print("\t{", end="\n\t\t")
+                for i, b in enumerate(bytes):
+                    print("0x%02x" % b, end="")
+                    if i != len(bytes) - 1:
+                        print(", ", end="")
+                    if i % 4 == 3:
+                        print("\n", end="\t\t")
+                    i += 1
+                print("\n\t}")

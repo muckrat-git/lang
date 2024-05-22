@@ -59,6 +59,8 @@ SEP_TOKENS = {
     ')' : Tokens.ENDE,
     '{' : Tokens.STARTE,
     '}' : Tokens.ENDE,
+    '[' : Tokens.STARTE,
+    ']' : Tokens.ENDE,
     ' ' : Tokens.WHITESPACE,
     '\n': Tokens.WHITESPACE,
     '\t': Tokens.WHITESPACE,

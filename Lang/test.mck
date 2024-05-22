@@ -1,3 +1,2 @@
-var exe = {
-    print("This shouldnt run");
-}();
+var list = [12, 52];
+print(list)
