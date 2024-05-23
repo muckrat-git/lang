@@ -3,7 +3,7 @@
 
 #include "mucktools.hpp"
 
-//#define DEBUG
+#define DEBUG
 
 using namespace Muck;
 
@@ -137,8 +137,10 @@ class Scope {
         if(expType == LITEXP) {
             ret.type = litType;
             ret.length = 0;
+            
             // Get literal size
             int depth = 1;
+            cout << "[";
             while(depth != 0) {
                 Debug(" " + to_string(int(*exp)) + " ");
 
@@ -148,14 +150,18 @@ class Scope {
                 ++ret.length;
                 ++exp;
             }
+            cout << "]";
             --exp;
             --ret.length;
+
+            cout << " " << ret.length << endl;
 
             // Allocate and set bytes
             ret.bytes = new byte[ret.length];
             for(u_int64_t i = 0; i < ret.length; i++) {
                 ret.bytes[ret.length - i - 1] = *(exp - i - 1);
             }
+            cout << "WTF" << ret.length;
             return ret;
         }
 
